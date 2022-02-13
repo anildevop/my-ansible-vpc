@@ -1,0 +1,21 @@
+- hosts: localhost
+  connection: local
+  gather_facts: false
+ 
+  tasks:
+
+  - name: create a new ec2 key pair, returns generated private key
+    ec2_key:
+      name: anil_vpc_keypair
+      region: us-east-2
+    register: vpckeypair
+
+  - name: print the created privatekey on console
+    debug:
+      var: vpckeypair
+
+  - name: copy private key into file
+    copy:
+      content: "{{vpckeypair.key.private_key}}"
+      dest: ./myfirstkeypair.pem
+    when: vpckeypair.changed == true
