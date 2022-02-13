@@ -1,6 +1,6 @@
 - hosts: localhost
   connection: local
-  gather_facts: false
+  gather_facts: true
  
   tasks:
 
@@ -18,4 +18,4 @@
     copy:
       content: "{{vpckeypair.key.private_key}}"
       dest: ./myfirstkeypair.pem
-    when: vpckeypair.changed == true
+    when: vpckeypair.changed
