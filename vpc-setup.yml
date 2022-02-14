@@ -16,5 +16,3 @@
       tenancy: default
       state: "{{state}}"
     register: vpcout
-  - name: print vpc out put
-    debug: vpcout
