@@ -1,7 +1,7 @@
-vpc_name: "anilprofile-vpc"
+vpc_name: "anilprofile-vpc1"
 
 # VPC Range
-vpcCidr: '172.20.0.0/16'
+vpcCidr: '172.19.0.0/16'
 
 # Subnets Range
 PubSub1Cidr: 172.20.1.0/24

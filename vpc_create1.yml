@@ -1,0 +1,25 @@
+- name: create new vpc,print details and save in new variable
+  hosts: localhost
+  connection: local
+  gather_facts: no
+
+  tasks:
+  - name: include variables
+    include_vars: vpc_var
+  
+  - name: create vpc
+    ec2_vpc_net:
+      name: "{{vpc_name}}"
+      cidr_block: "{{vpc_cidr_block}}"
+      region: "{{region}}"
+      dns_support: yes
+      dns_hostnames: yes
+      state: "{{state}}"
+    register: vpc_out
+  - name: print vpc details
+    debug:
+      var: vpc_out
+  - name: vpc details copy to file
+    copy:
+      content: "vpc_id: {{vpc_out.vpc.id}}"
+      dest: new_vpc_var2

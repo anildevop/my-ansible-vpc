@@ -1,0 +1,21 @@
+- name: Create new key pai,print and save
+  hosts: localhost
+  connection: local
+  gather_facts: no
+
+  tasks:
+  - name: Create key pair
+    ec2_key:
+      name: anil-sample-key
+      region: us-east-2
+    register: key_out
+
+  - name: Print pem key
+    debug:
+      var: key_out
+
+  - name: copy and save private key
+    copy:
+      content: "{{key_out.key.private_key}}"
+      dest: ./mykeypair.pem
+
